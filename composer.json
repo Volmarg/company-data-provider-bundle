@@ -1,0 +1,84 @@
+{
+    "name": "volmarg/company-data-provider",
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/ssd-extended-partition/www/bundles/web-scrapper-bundle"
+        },
+        {
+            "type": "path",
+            "url": "/ssd-extended-partition/www/bundles/search-engine-provider-bundle"
+        },
+        {
+            "type": "path",
+            "url": "/ssd-extended-partition/www/bundles/data-parser-bundle"
+        },
+        {
+            "type": "path",
+            "url": "/ssd-extended-partition/www/bundles/smtp-email-validator-bundle"
+        }
+    ],
+    "require": {
+        "php": ">=8.1.0",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "symfony/cache": "6.0.*",
+        "symfony/console": "6.0.*",
+        "symfony/dotenv": "6.0.*",
+        "symfony/flex": "^2.1",
+        "symfony/framework-bundle": "6.0.*",
+        "symfony/monolog-bundle": "^3.7",
+        "symfony/runtime": "6.0.*",
+        "symfony/serializer": "6.0.*",
+        "symfony/yaml": "6.0.*",
+        "volmarg/data-parser": "dev-master",
+        "volmarg/search-engine-provider": "dev-master",
+        "volmarg/smtp-email-validator": "@dev",
+        "volmarg/web-scrapper": "@dev"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "CompanyDataProvider\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CompanyDataProvider\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.0.*"
+        }
+    },
+    "require-dev": {
+        "symfony/debug-bundle": "6.0.*"
+    }
+}

@@ -1,0 +1,34 @@
+parameters:
+    clearbit.base_url: "https://clearbit.com/"
+    clearbit.company_name_to_domain.base_url: "https://%clearbit.api_key%@company.clearbit.com/v1/domains/find?name="
+    clearbit.api_key: "sk_5bf8df9f3089b10ca2dfdf79f9130406"
+
+    cache.website.namespace: "websiteCache"
+    cache.website.lifetime: 3600 # 1h
+    cache.website.directory: '%kernel.cache_dir%/website'
+
+    CompanyDataProvider\Service\ConfigLoader\ConfigLoader:
+        calls:
+            - setClearbitBaseUrl: ['%clearbit.base_url%']
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: true
+
+    CompanyDataProvider\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+            - '../src/Exception/'
+            - '../src/DTO/'
+            - '../src/DependencyInjection/'
+
+    GuzzleHttp\Client:
+        public: true
+
+    CompanyDataProvider\Service\AllowanceChecker\AllowanceCheckerInterface: '@CompanyDataProvider\Service\AllowanceChecker\DefaultAllowanceChecker'
